@@ -25,6 +25,20 @@ class TestFloatQuantizeAgreesWithOracleOnNonTieValues:
         for v in [0.0, 1.0, -1.0, 3.14159, -2.71828, 100.5, -50.25]:
             assert float_quantize(v, qp) == exact_quantize(v, qp)
 
+    def test_half_down_bug_kernel_agrees_with_exact_oracle_away_from_ties(self):
+        # ROUND_MODES["half_down_bug"] (kernels._round_half_down) is only
+        # ever invoked in this suite via the adversarial fixtures, which
+        # deliberately probe exact-tie boundaries. Its non-tie branch
+        # (the `return int(round(x))` fallback for ordinary values) was
+        # never independently exercised -- a bug there would corrupt
+        # every non-boundary quantization under this round mode without
+        # any test catching it.
+        from qdrift.kernels import ROUND_MODES
+        half_down_bug = ROUND_MODES["half_down_bug"]
+        qp = QParams(scale=0.037, zero_point=-3, qmin=-128, qmax=127)
+        for v in [0.0, 1.0, -1.0, 3.14159, -2.71828, 100.5, -50.25]:
+            assert float_quantize(v, qp, round_fn=half_down_bug) == exact_quantize(v, qp)
+
 
 class TestRoundBoundaryCheck:
     def test_half_even_round_mode_is_exact_on_every_fixture(self):

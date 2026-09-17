@@ -91,6 +91,21 @@ class TestRoundHalfDownBug:
         assert round_half_even(Fraction(1, 2)) == round_half_down(Fraction(1, 2))
         assert round_half_even(Fraction(5, 2)) == round_half_down(Fraction(5, 2))
 
+    def test_non_tie_values_round_normally_not_just_ties(self):
+        # Every existing round_half_down test uses an exact .5 tie, so the
+        # function's non-tie branch (remainder > half -> round up) was
+        # never exercised: a bug that broke ordinary (non-tie) rounding
+        # here would have gone undetected. round_half_down must agree
+        # with round_half_even away from ties (they only differ AT ties).
+        for value, expected in [
+            (Fraction(11, 10), 1),    # 1.1 -> 1 (below tie)
+            (Fraction(19, 10), 2),    # 1.9 -> 2 (above tie)
+            (Fraction(-11, 10), -1),  # -1.1 -> -1
+            (Fraction(-19, 10), -2),  # -1.9 -> -2
+        ]:
+            assert round_half_down(value) == expected
+            assert round_half_down(value) == round_half_even(value)
+
 
 class TestQParams:
     def test_rejects_non_positive_scale(self):
@@ -136,6 +151,16 @@ class TestExactQuantizeDequantize:
             got = exact_dequantize(code, qp)
             expected = (Decimal(code) - Decimal(qp.zero_point)) * Decimal(str(qp.scale))
             assert abs(Decimal(got.numerator) / Decimal(got.denominator) - expected) < Decimal("1e-15")
+
+    def test_exact_quantize_accepts_plain_int_input(self):
+        # exact_quantize's internal _to_fraction() has a dedicated
+        # isinstance(x, int) branch distinct from its Fraction and float
+        # branches; every other test in this suite passes a float or an
+        # already-Fraction value, so the plain-int input path (a legitimate
+        # public-API input per the Number type alias) was never exercised.
+        qp = QParams(scale=1.0, zero_point=0, qmin=-128, qmax=127)
+        assert exact_quantize(5, qp) == 5
+        assert exact_quantize(-5, qp) == -5
 
 
 class TestExactRequantizeAdd:
