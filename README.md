@@ -55,7 +55,8 @@ python -m pip install -e ".[dev]"
 ```
 
 Release wheels are available from [Releases](https://github.com/zhuhroscar-tech/qdrift/releases);
-check the accompanying `SHA256SUMS.txt` before installation.
+check the accompanying `SHA256SUMS.txt` before installation. See
+[CHANGELOG.md](CHANGELOG.md) for release history.
 
 ## Quick start
 
@@ -97,4 +98,4 @@ compared against.
 
 ## License
 
-MIT
+MIT. See [LICENSE](LICENSE).

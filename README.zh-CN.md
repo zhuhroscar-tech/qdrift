@@ -45,7 +45,8 @@ python -m pip install -e ".[dev]"
 ```
 
 发行版 wheel 包见 [Releases](https://github.com/zhuhroscar-tech/qdrift/releases)；
-安装前请核对随附的 `SHA256SUMS.txt`。
+安装前请核对随附的 `SHA256SUMS.txt`。发布历史见
+[CHANGELOG.md](CHANGELOG.md)。
 
 ## 快速开始
 
@@ -81,4 +82,4 @@ qdrift check-round --json
 
 ## 许可证
 
-MIT
+MIT。见 [LICENSE](LICENSE)。
