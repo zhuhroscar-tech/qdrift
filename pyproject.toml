@@ -1,13 +1,14 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "qdrift"
-version = "0.1.0"
+version = "0.1.1"
 description = "Exact-oracle correctness checker for affine INT8 quantization arithmetic: round-to-nearest-even boundaries and cross-scale element-wise add requantization"
 readme = "README.md"
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [{ name = "zhuhroscar-tech" }]
 requires-python = ">=3.9"
 dependencies = []
@@ -15,7 +16,6 @@ classifiers = [
   "Environment :: Console",
   "Intended Audience :: Developers",
   "Intended Audience :: Science/Research",
-  "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
