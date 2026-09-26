@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.1.3 — 2026-09-26
+
+- Added package metadata links for issue reporting and release history.
+- Made release-tag CI coverage explicit for `v*` tags so source releases rerun the same validation as main pushes.
+- Added repository-contract coverage for package resource links and tag-triggered CI wiring.
+
 ## v0.1.2 — 2026-09-24
 
 - Added release-history documentation and repository-contract checks for project completeness.

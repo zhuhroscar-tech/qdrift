@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "qdrift"
-version = "0.1.2"
+version = "0.1.3"
 description = "Exact-oracle correctness checker for affine INT8 quantization arithmetic: round-to-nearest-even boundaries and cross-scale element-wise add requantization"
 readme = "README.md"
 license = "MIT"
@@ -24,6 +24,8 @@ classifiers = [
 
 [project.urls]
 Homepage = "https://github.com/zhuhroscar-tech/qdrift"
+Issues = "https://github.com/zhuhroscar-tech/qdrift/issues"
+Changelog = "https://github.com/zhuhroscar-tech/qdrift/blob/main/CHANGELOG.md"
 
 [project.scripts]
 qdrift = "qdrift.cli:main"

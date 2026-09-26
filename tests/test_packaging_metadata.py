@@ -31,3 +31,10 @@ def test_deprecated_license_classifier_is_not_reintroduced():
 def test_setuptools_floor_supports_spdx_license_metadata():
     text = _pyproject_text()
     assert 'setuptools>=77' in text
+
+
+def test_project_metadata_links_maintenance_resources():
+    text = _pyproject_text()
+    assert 'Homepage = "https://github.com/zhuhroscar-tech/qdrift"' in text
+    assert 'Issues = "https://github.com/zhuhroscar-tech/qdrift/issues"' in text
+    assert 'Changelog = "https://github.com/zhuhroscar-tech/qdrift/blob/main/CHANGELOG.md"' in text

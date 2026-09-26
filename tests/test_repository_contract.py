@@ -46,6 +46,7 @@ def test_changelog_documents_current_version():
 
 def test_ci_builds_release_artifacts_and_checksums():
     workflow = CI_WORKFLOW.read_text(encoding="utf-8")
+    assert "tags: [\"v*\"]" in workflow
     assert "python -m build" in workflow
     assert "sha256sum" in workflow
     assert "actions/upload-artifact" in workflow
